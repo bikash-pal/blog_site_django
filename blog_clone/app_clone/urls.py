@@ -10,5 +10,7 @@ urlpatterns = [
     path('post/<pk>/edit/',views.UpdatePostView.as_view(),name='post_edit'),
     path('post/<pk>/remove/',views.DeleatPostView.as_view(),name='post_remove'),
     path('draft/',views.DraftListView,name='post_draft_list'),
+
+    path('post/<pk>/comment/',views.add_comment_to_post,name='add_comment_to_post'),
     
 ]
