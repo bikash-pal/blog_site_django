@@ -1,5 +1,10 @@
 {% extends 'app_clone/base.html'%}
 {% block content%}
+{% for post in posts%}
+    <p>created: {{post.created_date|date'd-m-Y'}}</p>
+    <h1><a href="{url 'post_detail' pk=post.pk}">{{post.title}}</a></h1>
 
+    <p>{{post.text|tuncatechars:200}}</p>
+{%endfor%}
 
 {% endblock %}
