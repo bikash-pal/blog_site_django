@@ -22,7 +22,7 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 class AboutView(TemplateView):
-    template_name='about.html'
+    template_name='app_clone/about.html'
 
 class PostListView(ListView):
     model=Post
