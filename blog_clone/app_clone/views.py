@@ -57,6 +57,13 @@ class DraftListView(LoginRequiredMixin,ListView):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
 
 #############################
+@login_required
+def publish_post(requset,pk):
+    post=get_object_or_404(Post,pk=pk)
+    post.publish()
+    return redirect('post_detail',pk=pk)
+
+    
 
 @login_required
 def add_comment_to_post(request,pk):
@@ -71,3 +78,16 @@ def add_comment_to_post(request,pk):
     else:
         form=CommentForm()
     return render(request,'app_clone/comment_form.html',{'form':form})
+
+@login_required
+def comment_approve(request,pk):
+    comment=get_object_or_404(Comment,pk)
+    comment.approve()
+    return redirect('post_detail',pk=comment.post.pk)
+
+@login_required
+def comment_remove(request,pk):
+    comment=get_object_or_404(Comment,pk)
+    post_pk=comment.post.pk
+    comment.delete()
+    return redirect('post_detail',pk=post_pk)
